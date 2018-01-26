@@ -3,7 +3,7 @@ import { route } from 'preact-router';
 import { connect } from 'preact-redux';
 import style from './style';
 
-class Home extends Component {
+class Register extends Component {
     state = {
         input: ''
     };
@@ -48,4 +48,4 @@ class Home extends Component {
     }
 }
 
-export default connect(s => ({name: s.name}))(Home);
+export default connect(s => ({name: s.name}))(Register);
