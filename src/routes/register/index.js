@@ -10,7 +10,7 @@ class Home extends Component {
 
     progressIfNameIsSet = () => {
         if (this.props.name) {
-            route('/start', true);
+            route('/wait', true);
         }
     };
 
@@ -24,6 +24,7 @@ class Home extends Component {
             type: 'set-name',
             value: this.state.input
         });
+        route('/wait', true);
     };
 
     onInput = ({target}) => {

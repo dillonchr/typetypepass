@@ -3,7 +3,7 @@ import { route } from 'preact-router';
 import { connect } from 'preact-redux';
 import style from './style';
 
-class Start extends Component {
+class Story extends Component {
     state = {
         input: ''
     };
@@ -21,19 +21,18 @@ class Start extends Component {
     };
 
     render(props, state) {
+        const promptLine = props.prompt || 'Kick off our story...';
+
         return (
             <div class={style.screen}>
-                <h1>Kick off our story...</h1>
-                <form onSubmit={this.sendSentence}>
-                    <label for="name" class={style.label}>First sentence</label>
-                    <div class={style.inputContainer}>
-                        <input id="name" class={style.input} type="text" value={this.state.input} onChange={this.onInput} />
-                        <button class={style.button}>Set</button>
-                    </div>
+                <h1>{promptLine}</h1>
+                <form class={style.inputContainer} onSubmit={this.sendSentence}>
+                    <input class={style.input} type="text" value={this.state.input} onChange={this.onInput} />
+                    <button class={style.button}>Send</button>
                 </form>
             </div>
         );
     }
 }
 
-export default connect(s => ({name: s.name}))(Start);
+export default connect(s => ({name: s.name}))(Story);

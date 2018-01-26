@@ -2,9 +2,11 @@ import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 import store from '../store';
 import { Provider } from 'preact-redux';
-import Home from '../routes/home';
+import Register from '../routes/register';
 import Profile from '../routes/profile';
-import Start from '../routes/start';
+import Story from '../routes/story';
+import Wait from '../routes/wait';
+import Footer from './footer';
 
 export default class App extends Component {
     /** Gets fired when the route changes.
@@ -20,10 +22,11 @@ export default class App extends Component {
             <Provider store={store}>
                 <div id="app">
                     <Router onChange={this.handleRoute}>
-                        <Home path="/" />
-                        <Start path="/start" />
-                        <Profile path="/profile/:user" />
+                        <Register path="/" />
+                        <Wait path="/wait" />
+                        <Story path="/story" />
                     </Router>
+                    <Footer />
                 </div>
             </Provider>
         );

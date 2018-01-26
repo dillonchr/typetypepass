@@ -1,0 +1,11 @@
+.footer {
+    background: purple;
+    bottom: 0;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    left: 0;
+    padding: 0 1rem;
+    position: fixed;
+    right: 0;
+}
