@@ -22,9 +22,14 @@ const store = createStore((state = initialState, action) => {
         case 'add-line':
             socket.emit('add-line', action.value);
             return {...state, lastSentSentence: action.value, waiting: true};
+        case 'end-story':
+            socket.emit('end-story', action.value);
+            return {...state, lastSentSentence: action.value, waiting: true};
         case 'receive-prompt':
             const { cycle, prompt, first } = action.value;
             return {...state, cycle, prompt, lastSentSentence: null, waiting: false, first};
+        case 'storytime':
+            return {...state, waiting: false, story: action.value};
         default:
             return state;
     }
@@ -47,6 +52,10 @@ socket.on('list-players', players => {
 
 socket.on('your-turn', turn => {
     store.dispatch({type: 'receive-prompt', value: turn});
+});
+
+socket.on('storytime', story => {
+    store.dispatch({type: 'storytime', value: story});
 });
 
 socket.on('early-bird', () => {

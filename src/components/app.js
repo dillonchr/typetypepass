@@ -3,7 +3,7 @@ import { Router } from 'preact-router';
 import store from '../store';
 import { Provider } from 'preact-redux';
 import Register from '../routes/register';
-import Profile from '../routes/profile';
+import Read from '../routes/read';
 import Story from '../routes/story';
 import Wait from '../routes/wait';
 import Footer from './footer';
@@ -25,6 +25,7 @@ export default class App extends Component {
                         <Register path="/" />
                         <Wait path="/wait" />
                         <Story path="/story" />
+                        <Read path="/read" />
                     </Router>
                     <Footer />
                 </div>

@@ -5,7 +5,8 @@ import style from './style';
 
 const Wait = props => {
     if (!props.waiting) {
-        route('/story', true);
+        const target = props.hasStory ? '/read' : '/story';
+        route(target, true);
     }
 
     return (
@@ -15,4 +16,4 @@ const Wait = props => {
     );
 };
 
-export default connect(s => ({waiting: s.waiting}))(Wait);
+export default connect(s => ({waiting: s.waiting, hasStory: !!s.story}))(Wait);

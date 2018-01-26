@@ -14,6 +14,15 @@ class Story extends Component {
             type: 'add-line',
             value: this.state.input
         });
+        route('/wait', true);
+    };
+
+    endStory = () => {
+        this.props.dispatch({
+            type: 'end-story',
+            value: this.state.input
+        });
+        route('/wait', true);
     };
 
     onInput = ({target}) => {
@@ -30,9 +39,10 @@ class Story extends Component {
                     <input class={style.input} type="text" value={this.state.input} onChange={this.onInput} />
                     <button class={style.button}>Send</button>
                 </form>
+                {props.canEnd && <button onClick={this.endStory} class={style.button}>End Story</button>}
             </div>
         );
     }
 }
 
-export default connect(s => ({name: s.name}))(Story);
+export default connect(s => ({name: s.name, prompt: s.prompt, canEnd: s.cycle > 3}))(Story);
