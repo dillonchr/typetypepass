@@ -1,42 +1,46 @@
 import { createStore } from 'redux';
 import io from 'socket.io-client';
 
-const initialState = {
+const socket = io(`https://${window.location.hostname}:7715`);
 
+const initialState = {
+    name: window.localStorage.getItem('ttp-player-name')
 };
 
-const reducer = (state = initialState, action) => {
+const store = createStore((state = initialState, action) => {
     switch(action.type) {
+        case 'connection':
+            return {...state, online: action.value};
+        case 'set-name':
+            window.localStorage.setItem('ttp-player-name', action.value);
+            return {...state, name: action.value};
+        case 'list-players':
+            return {...state, players: action.value};
+        case 'add-line':
+            socket.emit('add-line', action.value);
+            return {...state, lastSentSentence: action.value};
+        case 'receive-prompt':
+            const { cycle, prompt } = action.value;
+            return {...state, cycle, prompt, lastSentSentence: null };
         default:
             return state;
     }
-};
-
-const store = createStore(reducer);
-
-const getName = () => {
-    const storedName = window.localStorage.getItem('user-name');
-    if (!storedName) {
-        const name = prompt('What is your name?');
-        window.localStorage.setItem('user-name', name);
-        return name;
-    }
-    return storedName;
-};
-
-const socket = io(`${window.location.protocol}//${window.location.hostname}:7715`);
+});
 
 socket.on('connect', () => {
-    socket.emit('add-player', getName());
+    store.dispatch({type: 'connection', value: true});
+});
+
+socket.on('disconnect', () => {
+    store.dispatch({type: 'connection', value: false});
 });
 
 socket.on('list-players', players => {
-    document.querySelector('#players-list').innerHTML = players.reduce((html, name) => `${html}<li>${name}</li>`, '');
+    store.dispatch({type: 'list-players', value: players});
 });
 
 socket.on('your-turn', turn => {
-    const precedingSentence = (turn ? turn.prompt : undefined) || 'BEGIN STORY!';
-    socket.emit('add-line', prompt(precedingSentence));
+    store.dispatch({type: 'receive-prompt', value: turn});
 });
 
 export default store;
