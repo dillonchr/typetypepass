@@ -1,21 +1,25 @@
 import { createStore } from 'redux';
 import io from 'socket.io-client';
+import identity from './identity';
 
 const socket = io(`https://${window.location.hostname}:7715`);
 
 const initialState = {
-    name: window.localStorage.getItem('ttp-player-name'),
-    waiting: true,
+    name: identity.getPlayerName(),
     players: []
 };
 
 const store = createStore((state = initialState, action) => {
     switch(action.type) {
         case 'connection':
-            return {...state, online: action.value};
+            return {...state, online: true};
+        case 'disconnect':
+            return {...state, online: false, waiting: true};
+        case 'wait':
+            return {...state, waiting: true};
         case 'set-name':
             socket.emit('add-player', action.value);
-            window.localStorage.setItem('ttp-player-name', action.value);
+            identity.savePlayerName(action.value);
             return {...state, name: action.value, waiting: true};
         case 'list-players':
             return {...state, players: action.value};
@@ -37,13 +41,16 @@ const store = createStore((state = initialState, action) => {
 
 socket.on('connect', () => {
     store.dispatch({type: 'connection', value: true});
+    socket.emit('register-uuid', identity.getUuid());
+    console.log('REGISTRD');
     if (initialState.name) {
         socket.emit('add-player', initialState.name);
+        console.log('NAMED');
     }
 });
 
 socket.on('disconnect', () => {
-    store.dispatch({type: 'connection', value: false});
+    store.dispatch({type: 'disconnect'});
 });
 
 socket.on('list-players', players => {
@@ -51,11 +58,17 @@ socket.on('list-players', players => {
 });
 
 socket.on('your-turn', turn => {
+    console.log('YOURTURN', turn);
     store.dispatch({type: 'receive-prompt', value: turn});
 });
 
 socket.on('storytime', story => {
     store.dispatch({type: 'storytime', value: story});
+});
+
+socket.on('wait', () => {
+    console.log('WAIT');
+    store.dispatch({type: 'wait'});
 });
 
 socket.on('early-bird', () => {

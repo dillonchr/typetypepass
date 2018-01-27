@@ -32,6 +32,10 @@ class Story extends Component {
     render(props, state) {
         const promptLine = props.prompt || 'Kick off our story...';
 
+        if (props.waiting) {
+            route('/wait', true);
+        }
+
         return (
             <div class={style.screen}>
                 <h1>{promptLine}</h1>
@@ -45,4 +49,4 @@ class Story extends Component {
     }
 }
 
-export default connect(s => ({name: s.name, prompt: s.prompt, canEnd: s.cycle > 3}))(Story);
+export default connect(s => ({name: s.name, prompt: s.prompt, canEnd: s.cycle > 3, waiting: s.waiting}))(Story);
