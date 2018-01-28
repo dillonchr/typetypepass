@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import { route } from 'preact-router';
 import { connect } from 'preact-redux';
 import style from './style';
 
@@ -8,23 +7,12 @@ class Register extends Component {
         input: ''
     };
 
-    progressIfNameIsSet = () => {
-        if (this.props.name) {
-            route('/wait', true);
-        }
-    };
-
-    componentWillMount = () => {
-        this.progressIfNameIsSet();
-    };
-
     setName = e => {
         e.preventDefault();
         this.props.dispatch({
             type: 'set-name',
             value: this.state.input
         });
-        route('/wait', true);
     };
 
     onInput = ({target}) => {

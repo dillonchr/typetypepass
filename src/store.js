@@ -25,13 +25,13 @@ const store = createStore((state = initialState, action) => {
             return {...state, players: action.value};
         case 'add-line':
             socket.emit('add-line', action.value);
-            return {...state, lastSentSentence: action.value, waiting: true};
+            return {...state, waiting: true};
         case 'end-story':
             socket.emit('end-story', action.value);
-            return {...state, lastSentSentence: action.value, waiting: true};
+            return {...state, waiting: true};
         case 'receive-prompt':
-            const { cycle, prompt, first } = action.value;
-            return {...state, cycle, prompt, lastSentSentence: null, waiting: false, first};
+            const { cycle, prompt } = action.value;
+            return {...state, cycle, prompt, waiting: false};
         case 'storytime':
             return {...state, waiting: false, story: action.value};
         default:

@@ -1,11 +1,7 @@
 import { h, Component } from 'preact';
-import { Router } from 'preact-router';
 import store from '../store';
 import { Provider } from 'preact-redux';
-import Register from '../routes/register';
-import Read from '../routes/read';
-import Story from '../routes/story';
-import Wait from '../routes/wait';
+import Router from '../routes/index';
 import Footer from './footer';
 
 export default class App extends Component {
@@ -21,12 +17,7 @@ export default class App extends Component {
         return (
             <Provider store={store}>
                 <div id="app">
-                    <Router onChange={this.handleRoute}>
-                        <Register path="/" />
-                        <Wait path="/wait" />
-                        <Story path="/story" />
-                        <Read path="/read" />
-                    </Router>
+                    <Router />
                     <Footer />
                 </div>
             </Provider>

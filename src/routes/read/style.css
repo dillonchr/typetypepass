@@ -1,5 +1,8 @@
-.profile {
-	padding: 56px 20px;
-	min-height: 100%;
+.read {
+	padding: 1.5rem 1.5rem 5rem;
 	width: 100%;
+}
+.script {
+    font-size: 1.5rem;
+    margin: 0;
 }
