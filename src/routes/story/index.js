@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import { route } from 'preact-router';
 import { connect } from 'preact-redux';
 import style from './style';
 
@@ -14,7 +13,6 @@ class Story extends Component {
             type: 'add-line',
             value: this.state.input
         });
-        route('/wait', true);
     };
 
     endStory = () => {
@@ -22,7 +20,6 @@ class Story extends Component {
             type: 'end-story',
             value: this.state.input
         });
-        route('/wait', true);
     };
 
     onInput = ({target}) => {
@@ -31,10 +28,6 @@ class Story extends Component {
 
     render(props, state) {
         const promptLine = props.prompt || 'Kick off our story...';
-
-        if (props.waiting) {
-            route('/wait', true);
-        }
 
         return (
             <div class={style.screen}>
@@ -49,4 +42,7 @@ class Story extends Component {
     }
 }
 
-export default connect(s => ({name: s.name, prompt: s.prompt, canEnd: s.cycle > 3, waiting: s.waiting}))(Story);
+export default connect(s => ({
+    prompt: s.prompt,
+    canEnd: s.cycle > 3
+}))(Story);

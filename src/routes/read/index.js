@@ -1,17 +1,11 @@
 import { h } from 'preact';
-import { route } from 'preact-router';
-import { connect } from 'preact-redux';
 import style from './style';
 
-const Read = props => {
-    if (!props.story) {
-        route('/wait', true);
-    }
+export default props => {
     return (
-        <div class={style.profile}>
-            <h1>{props.story}</h1>
+        <div class={style.read}>
+            <p class={style.script}>{props.story}</p>
+            <button onClick={props.onRestart} class={style.button}>Restart</button>
         </div>
     );
 };
-
-export default connect(s => ({story: s.story}))(Read);

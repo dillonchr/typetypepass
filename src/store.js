@@ -6,7 +6,8 @@ const socket = io(`https://${window.location.hostname}:7715`);
 
 const initialState = {
     name: identity.getPlayerName(),
-    players: []
+    players: [],
+    waiting: true
 };
 
 const store = createStore((state = initialState, action) => {
@@ -25,15 +26,18 @@ const store = createStore((state = initialState, action) => {
             return {...state, players: action.value};
         case 'add-line':
             socket.emit('add-line', action.value);
-            return {...state, lastSentSentence: action.value, waiting: true};
+            return {...state, waiting: true};
         case 'end-story':
             socket.emit('end-story', action.value);
-            return {...state, lastSentSentence: action.value, waiting: true};
+            return {...state, waiting: true};
         case 'receive-prompt':
-            const { cycle, prompt, first } = action.value;
-            return {...state, cycle, prompt, lastSentSentence: null, waiting: false, first};
+            const { cycle, prompt } = action.value;
+            return {...state, cycle, prompt, waiting: false};
         case 'storytime':
             return {...state, waiting: false, story: action.value};
+        case 'restart':
+            socket.emit('add-player', identity.getPlayerName());
+            return {...state, waiting: true, story: null, cycle: null, prompt: null};
         default:
             return state;
     }
@@ -42,7 +46,7 @@ const store = createStore((state = initialState, action) => {
 socket.on('connect', () => {
     store.dispatch({type: 'connection', value: true});
     socket.emit('register-uuid', identity.getUuid());
-    console.log('REGISTRD');
+    console.log('REGISTRD', identity.getUuid());
     if (initialState.name) {
         socket.emit('add-player', initialState.name);
         console.log('NAMED');
