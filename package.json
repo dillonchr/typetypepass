@@ -3,9 +3,10 @@
   "name": "type-type-pass",
   "version": "0.0.0",
   "license": "MIT",
+  "homepage": "https://dillonchristensen.com/typetypepass/",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
-    "build": "preact build",
+    "build": "preact build --template src/template.html --no-prerender --clean",
     "serve": "preact build && preact serve",
     "dev": "preact watch --template src/template.html",
     "lint": "eslint src"
