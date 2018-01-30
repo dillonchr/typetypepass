@@ -33,10 +33,10 @@ class Story extends Component {
             <div class={style.screen}>
                 <h1>{promptLine}</h1>
                 <form class={style.inputContainer} onSubmit={this.sendSentence}>
-                    <input class={style.input} type="text" value={this.state.input} onChange={this.onInput} />
-                    <button class={style.button}>Send</button>
+                    <input autoFocus class={style.input} type="text" value={this.state.input} onInput={this.onInput} />
+                    <button disabled={!this.state.input} class={style.button}>Send</button>
                 </form>
-                {props.canEnd && <button onClick={this.endStory} class={style.button}>End Story</button>}
+                {props.canEnd && <button disabled={!this.state.input} onClick={this.endStory} class={style.button}>End Story</button>}
             </div>
         );
     }

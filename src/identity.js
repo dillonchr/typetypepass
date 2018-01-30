@@ -18,5 +18,11 @@ export default {
             return newUuid;
         }
         return uuid;
+    },
+    getAll() {
+        return {
+            name: this.getPlayerName(),
+            uuid: this.getUuid()
+        };
     }
 };

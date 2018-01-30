@@ -16,7 +16,7 @@ const Router = props => {
             return <Wait />;
         }
         if (props.story) {
-            return <Read story={props.story} />;
+            return <Read story={props.story} onRestart={() => props.dispatch({type: 'restart'})} />;
         }
         return <Story />;
     };

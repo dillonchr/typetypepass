@@ -17,3 +17,6 @@
     border: none;
     color: white;
 }
+.button:disabled {
+    background: #b298b2;
+}

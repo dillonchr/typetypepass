@@ -36,7 +36,7 @@ const store = createStore((state = initialState, action) => {
         case 'storytime':
             return {...state, waiting: false, story: action.value};
         case 'restart':
-            socket.emit('add-player', identity.getPlayerName());
+            socket.emit('restart', identity.getAll());
             return {...state, waiting: true, story: null, cycle: null, prompt: null};
         default:
             return state;
@@ -46,10 +46,8 @@ const store = createStore((state = initialState, action) => {
 socket.on('connect', () => {
     store.dispatch({type: 'connection', value: true});
     socket.emit('register-uuid', identity.getUuid());
-    console.log('REGISTRD', identity.getUuid());
     if (initialState.name) {
         socket.emit('add-player', initialState.name);
-        console.log('NAMED');
     }
 });
 
@@ -62,7 +60,6 @@ socket.on('list-players', players => {
 });
 
 socket.on('your-turn', turn => {
-    console.log('YOURTURN', turn);
     store.dispatch({type: 'receive-prompt', value: turn});
 });
 
@@ -71,7 +68,6 @@ socket.on('storytime', story => {
 });
 
 socket.on('wait', () => {
-    console.log('WAIT');
     store.dispatch({type: 'wait'});
 });
 
