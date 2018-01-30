@@ -42,4 +42,7 @@ class Story extends Component {
     }
 }
 
-export default connect(s => ({name: s.name, prompt: s.prompt, canEnd: s.cycle > 3, waiting: s.waiting}))(Story);
+export default connect(s => ({
+    prompt: s.prompt,
+    canEnd: s.cycle > 3
+}))(Story);
