@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 import io from 'socket.io-client';
 import identity from './identity';
 
-const socket = io(`https://${window.location.hostname}:24897`);
+const socket = io(`${window.location.protocol}//${window.location.hostname}:${window.location.port}`);
 
 const initialState = {
     name: identity.getPlayerName(),
