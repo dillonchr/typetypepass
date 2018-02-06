@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 import io from 'socket.io-client';
 import identity from './identity';
 
-const socket = io(process.env.SOCKETIO || 'https://typetypepass.com:24897/');
+const socket = io('https://typetypepass.com:24897/');
 
 const initialState = {
     name: identity.getPlayerName(),
