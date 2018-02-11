@@ -1,15 +1,18 @@
 import { h } from 'preact';
 import { connect } from 'preact-redux';
-import { getCurrentUrl, Link } from 'preact-router';
+import { Link } from 'preact-router';
 import style from './style';
 import icono from 'icono';
 
-const Footer = props => {
+const Footer = ({
+    playerCount,
+    currentUrl
+                }) => {
     const getCTA = () => {
-        if (getCurrentUrl() === '/') {
-            return <Link class={style.button}><i class="icono-rename"></i>Play</Link>
+        if (currentUrl === '/') {
+            return <Link class={style.button} href="/play"><i class="icono-rename"></i>Play</Link>
         } else {
-            return <p class={style.playerCount}>{props.playerCount}</p>;
+            return <p class={style.playerCount}>{playerCount}</p>;
         }
     };
 
@@ -21,4 +24,7 @@ const Footer = props => {
     );
 };
 
-export default connect(s => ({playerCount: s.players.length}))(Footer);
+export default connect(s => ({
+    playerCount: s.players.length,
+    currentUrl: s.currentUrl
+}))(Footer);

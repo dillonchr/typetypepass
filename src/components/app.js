@@ -1,22 +1,27 @@
 import { h } from 'preact';
 import { Router } from 'preact-router';
+import { connect } from 'preact-redux';
 import store from '../store';
 import { Provider } from 'preact-redux';
 import Header from './header';
 import Home from '../routes/home';
 import Play from '../routes';
 
-export default () => {
-    return (
-        <Provider store={store}>
+const App = ({ changeUrl }) => {
+    const onRouteChange = ({url}) => changeUrl(url);
 
-            <div id="app">
-                <Header />
-                <Router>
-                    <Home exact path="/" />
-                    <Play path="/play" />
-                </Router>
-            </div>
-        </Provider>
+    return (
+        <div id="app">
+            <Header />
+            <Router onChange={onRouteChange}>
+                <Home exact path="/" />
+                <Play path="/play" />
+            </Router>
+        </div>
     );
-}
+};
+
+export default connect(() => ({}),
+    d => ({
+        changeUrl: value => d({type: 'url-change', value})
+    }))(App);

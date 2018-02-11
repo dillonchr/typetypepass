@@ -1,13 +1,15 @@
 import { createStore } from 'redux';
 import io from 'socket.io-client';
 import identity from './identity';
+import { getCurrentUrl } from 'preact-router';
 
 const socket = io('https://typetypepass.com:24897/');
 
 const initialState = {
     name: identity.getPlayerName(),
     players: [],
-    waiting: true
+    waiting: true,
+    currentUrl: getCurrentUrl()
 };
 
 const store = createStore((state = initialState, action) => {
@@ -38,6 +40,8 @@ const store = createStore((state = initialState, action) => {
         case 'restart':
             socket.emit('restart', identity.getAll());
             return {...state, waiting: true, story: null, cycle: null, prompt: null};
+        case 'url-change':
+            return { ...state, currentUrl: action.value };
         default:
             return state;
     }
