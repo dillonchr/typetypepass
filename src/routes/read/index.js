@@ -5,7 +5,9 @@ export default props => {
     return (
         <div class={style.read}>
             <p class={style.script}>{props.story}</p>
-            <button onClick={props.onRestart} class={style.button}>Restart</button>
+            <button onClick={props.onRestart} class={style.button}>
+                <i class="icono-reset"></i>
+            </button>
         </div>
     );
 };
