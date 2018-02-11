@@ -1,19 +1,19 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 import style from './style';
+import getRandoPrompt from './random-prompt';
 
 class Story extends Component {
     state = {
         input: ''
     };
 
-    sendSentence = e => {
+    onSubmit = e => {
         e.preventDefault();
-        this.props.dispatch({
-            type: 'add-line',
-            value: this.state.input
-        });
+        this.sendSentence();
     };
+
+    sendSentence = () => this.props.onSubmit(this.state.input);
 
     endStory = () => {
         this.props.dispatch({
@@ -27,16 +27,27 @@ class Story extends Component {
     };
 
     render(props, state) {
-        const promptLine = props.prompt || 'Kick off our story...';
-
         return (
             <div class={style.screen}>
-                <h1>{promptLine}</h1>
-                <form class={style.inputContainer} onSubmit={this.sendSentence}>
-                    <input autoFocus class={style.input} type="text" value={this.state.input} onInput={this.onInput} />
-                    <button disabled={!this.state.input} class={style.button}>Send</button>
-                </form>
-                {props.canEnd && <button disabled={!this.state.input} onClick={this.endStory} class={style.button}>End Story</button>}
+                <div class={style.prompt}>
+                    {props.prompt && <p>...</p>}
+                    <p>{props.prompt}</p>
+                    <form class={style.inputContainer} onSubmit={this.onSubmit}>
+                        <textarea autoFocus
+                                  class={style.input}
+                                  value={this.state.input}
+                                  onInput={this.onInput}
+                                  placeholder={getRandoPrompt()} />
+                        <div class={style.buttonContainer}>
+                            <button disabled={!props.canEnd || !this.state.input} onClick={this.endStory} class={style.button}>
+                                <i class="icono-document"></i>
+                            </button>
+                            <button disabled={!this.state.input} class={style.button} onClick={this.sendSentence}>
+                                <i class="icono-plus"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     }
@@ -45,4 +56,6 @@ class Story extends Component {
 export default connect(s => ({
     prompt: s.prompt,
     canEnd: s.cycle > 3
+}), d => ({
+    sendSentence: s => d({ type: 'add-line', value: s })
 }))(Story);
