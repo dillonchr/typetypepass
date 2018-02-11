@@ -8,7 +8,7 @@ import Wait from './wait';
 
 const Router = props => {
 
-    const restart = () => props.dispatch({ type: 'restart' });
+    const onRestart = () => props.dispatch({ type: 'restart' });
 
     const getCurrentRoute = () => {
         if (props.needsName) {
@@ -18,8 +18,7 @@ const Router = props => {
             return <Wait />;
         }
         if (props.story) {
-// eslint-disable-next-line react/jsx-no-bind
-            return <Read story={props.story} onRestart={restart} />;
+            return <Read story={props.story} onRestart={onRestart} />;
         }
         return <Story />;
     };
