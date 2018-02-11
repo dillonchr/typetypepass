@@ -8,6 +8,8 @@ export default () => (
         <h2 id="rules">Rules</h2>
         <p>You need <strong>3 or more people</strong> to kick off the game. The more the merrier but don't get greedy.</p>
         <p>Once the minimum number of players have connected to the server, the first player in the round will be able to kick off the story with the first sentence.</p>
+        <img class={style.diagram} src="assets/convoluted-diagram.gif" alt="One convoluted diagram" />
+        <p class={style.diagramCaption}>A non-sensical diagram of the words following.</p>
         <h3 id="rules-turn">Turn</h3>
         <p>A player's turn consists of <strong>simply writing a single sentence</strong> to continue the story. No pressure. The less method there is the better the madness.</p>
         <p>Except for the first sentence, everyone will have the preceding sentence of the story displayed as they write their own sentence. Once they submit their sentence it's passed to the next player for their continuation.</p>

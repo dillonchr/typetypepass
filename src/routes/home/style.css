@@ -1,3 +1,9 @@
 .home {
     padding: 1rem;
 }
+.diagram {
+    height: 10rem;
+}
+.diagramCaption {
+    font-size: 0.7rem;
+}
