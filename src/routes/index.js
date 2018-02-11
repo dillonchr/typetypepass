@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { h } from 'preact';
 import { connect } from 'preact-redux';
 import Register from './register';
@@ -7,8 +8,9 @@ import Wait from './wait';
 
 const Router = props => {
 
+    const onRestart = () => props.dispatch({ type: 'restart' });
+
     const getCurrentRoute = () => {
-        console.log(props);
         if (props.needsName) {
             return <Register />;
         }
@@ -16,7 +18,7 @@ const Router = props => {
             return <Wait />;
         }
         if (props.story) {
-            return <Read story={props.story} onRestart={() => props.dispatch({type: 'restart'})} />;
+            return <Read story={props.story} onRestart={onRestart} />;
         }
         return <Story />;
     };

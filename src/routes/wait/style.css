@@ -1,18 +1,13 @@
 .home {
 	padding: 0 2rem;
+    text-align: center;
 	width: 100%;
 }
-.label {
-    font-size: 0.75rem;
+.home img {
+    max-width: 50%;
 }
-.input {
-    display: block;
-}
-.inputContainer {
-    display: flex;
-}
-.button {
-    background: purple;
-    border: none;
-    color: white;
+@media (min-width: 600px) {
+    .home img {
+        max-width: 300px;
+    }
 }
