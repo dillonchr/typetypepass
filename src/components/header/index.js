@@ -1,13 +1,12 @@
-import { h, Component } from 'preact';
-import { route } from 'preact-router';
+import { h } from 'preact';
 import { connect } from 'preact-redux';
 import style from './style';
 
 const Footer = props => {
-    const noun = props.playerCount === 1 ? 'player' : 'players';
     return (
         <div class={style.footer}>
-            <p>{props.playerCount} {noun} online</p>
+            <img class={style.appLogo} src="assets/type-type-pass-logo.gif" />
+            <p class={style.playerCount}>{props.playerCount}</p>
         </div>
     );
 };

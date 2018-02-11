@@ -25,10 +25,10 @@ class Register extends Component {
                 <h1>Type type pass</h1>
                 <p>Let's write an awesome story.</p>
                 <form onSubmit={this.setName}>
-                    <label for="name" class={style.label}>What's your name?</label>
+                    <label for="name" class={style.label}>First, what's your name?</label>
                     <div class={style.inputContainer}>
-                        <input id="name" class={style.input} type="text" value={this.state.input} onChange={this.onInput} />
-                        <button class={style.button}>Set</button>
+                        <input id="name" class={style.input} type="text" value={this.state.input} onInput={this.onInput} />
+                        <button disabled={!this.state.input} class={style.button}>Set</button>
                     </div>
                 </form>
             </div>

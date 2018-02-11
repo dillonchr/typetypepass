@@ -7,13 +7,27 @@
     font-size: 0.75rem;
 }
 .input {
+    border: solid 1px #ccc;
+    border-radius: 0;
+    border-right: none;
     display: block;
+    flex: 1;
+    margin-right: 0;
+    outline: none;
+    padding: 0.5rem;
 }
 .inputContainer {
     display: flex;
+    width: 100%;
 }
 .button {
-    background: purple;
+    background: #108CCF;
     border: none;
-    color: white;
+    color: #FaFaFa;
+    margin-left: 0;
+    padding: 0 1rem;
+}
+.button:disabled {
+    background: #ccc;
+    color: #333;
 }

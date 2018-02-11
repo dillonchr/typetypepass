@@ -1,0 +1,25 @@
+.footer {
+    align-items: center;
+    background-color: #671F75;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.appLogo {
+    height: 2rem;
+}
+
+.playerCount {
+    align-items: center;
+    background-color: #9965AB;
+    border-radius: 50%;
+    display: flex;
+    font-size: 0.7rem;
+    font-weight: 700;
+    height: 2rem;
+    justify-content: center;
+    padding: 1rem;
+    width: 2rem;
+}
