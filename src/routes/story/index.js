@@ -13,14 +13,9 @@ class Story extends Component {
         this.sendSentence();
     };
 
-    sendSentence = () => this.props.onSubmit(this.state.input);
+    sendSentence = () => this.props.sendSentence(this.state.input);
 
-    endStory = () => {
-        this.props.dispatch({
-            type: 'end-story',
-            value: this.state.input
-        });
-    };
+    endStory = () => this.props.endStory(this.state.input);
 
     onInput = ({target}) => {
         this.setState({input: target.value});
@@ -57,5 +52,6 @@ export default connect(s => ({
     prompt: s.prompt,
     canEnd: s.cycle > 3
 }), d => ({
-    sendSentence: s => d({ type: 'add-line', value: s })
+    sendSentence: s => d({ type: 'add-line', value: s }),
+    endStory: s => d({type: 'end-story', value: s})
 }))(Story);
