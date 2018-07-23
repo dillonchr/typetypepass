@@ -1,5 +1,5 @@
-import { h, Component } from 'preact';
-import { connect } from 'preact-redux';
+import {h, Component} from 'preact';
+import {connect} from 'preact-redux';
 import style from './style';
 import getRandoPrompt from './random-prompt';
 
@@ -13,14 +13,9 @@ class Story extends Component {
         this.sendSentence();
     };
 
-    sendSentence = () => this.props.onSubmit(this.state.input);
+    sendSentence = () => this.props.sendSentence(this.state.input);
 
-    endStory = () => {
-        this.props.dispatch({
-            type: 'end-story',
-            value: this.state.input
-        });
-    };
+    endStory = () => this.props.endStory(this.state.input);
 
     onInput = ({target}) => {
         this.setState({input: target.value});
@@ -37,9 +32,10 @@ class Story extends Component {
                                   class={style.input}
                                   value={this.state.input}
                                   onInput={this.onInput}
-                                  placeholder={getRandoPrompt()} />
+                                  placeholder={getRandoPrompt()}/>
                         <div class={style.buttonContainer}>
-                            <button disabled={!props.canEnd || !this.state.input} onClick={this.endStory} class={style.button}>
+                            <button disabled={!props.canEnd || !this.state.input} onClick={this.endStory}
+                                    class={style.button}>
                                 <i class="icono-document"></i>
                             </button>
                             <button disabled={!this.state.input} class={style.button} onClick={this.sendSentence}>
@@ -57,5 +53,6 @@ export default connect(s => ({
     prompt: s.prompt,
     canEnd: s.cycle > 3
 }), d => ({
-    sendSentence: s => d({ type: 'add-line', value: s })
+    sendSentence: s => d({type: 'add-line', value: s}),
+    endStory: value => d({type: 'end-story', value})
 }))(Story);
