@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  ui:
+    build: .
+    restart: unless-stopped
+    ports:
+      - 7709:5000
