@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import identity from './identity';
 import { getCurrentUrl } from 'preact-router';
 
-const socket = io('http://api.typetypepass.com/');
+const socket = io('https://api.typetypepass.com/');
 
 const initialState = {
     name: identity.getPlayerName(),
