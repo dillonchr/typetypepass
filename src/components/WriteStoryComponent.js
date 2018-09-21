@@ -98,10 +98,10 @@ class Story extends React.Component {
                                   placeholder={getRandoPrompt()}/>
                         <ButtonContainer>
                             <Button disabled={!this.props.canEnd || !this.state.input} onClick={this.endStory}>
-                                document_icon
+                                The End
                             </Button>
                             <Button disabled={!this.state.input} onClick={this.sendSentence}>
-                                plus_icon
+                                Send
                             </Button>
                         </ButtonContainer>
                     </InputContainer>
