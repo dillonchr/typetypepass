@@ -1,13 +1,15 @@
-import { h } from 'preact';
-import App from './components/app';
-import './style';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
 import store from './store';
-import { Provider } from 'preact-redux';
+import {Provider} from 'react-redux';
 
-export default () => {
-    return (
-        <Provider store={store}>
-            <App />
-        </Provider>
-    );
-};
+ReactDOM.render((
+    <Provider store={store}>
+        <App />
+    </Provider>
+), document.getElementById('root'));
+
+registerServiceWorker();
