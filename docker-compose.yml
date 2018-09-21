@@ -5,4 +5,4 @@ services:
     build: .
     restart: unless-stopped
     ports:
-      - 7709:5000
+      - 7709:80

@@ -2,6 +2,7 @@
   "name": "type-type-pass",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://typetypepass.com",
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
