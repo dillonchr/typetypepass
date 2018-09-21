@@ -67,11 +67,17 @@ class Story extends React.Component {
         this.sendSentence();
     };
 
-    sendSentence = () => {
+    sendSentence = (e) => {
+        if (e && e.preventDefault) {
+            e.preventDefault();
+        }
         this.props.sendSentence(this.state.input);
     };
 
-    endStory = () => {
+    endStory = (e) => {
+        if (e && e.preventDefault) {
+            e.preventDefault();
+        }
         this.props.endStory(this.state.input);
     };
 

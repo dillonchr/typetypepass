@@ -1,9 +1,8 @@
 import { createStore } from 'redux';
 import io from 'socket.io-client';
 import identity from './identity';
-//import { getCurrentUrl } from 'preact-router';
 
-const socket = io('https://api.typetypepass.com/');
+const socket = io(process.env.REACT_APP_API_URL || 'https://api.typetypepass.com/');
 
 const initialState = {
     name: identity.getPlayerName(),
