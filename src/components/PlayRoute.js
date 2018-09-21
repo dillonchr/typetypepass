@@ -6,20 +6,16 @@ import Write from './WriteStoryComponent';
 import Wait from './WaitComponent';
 
 const Router = props => {
-    const getCurrentRoute = () => {
-        if (props.needsName) {
-            return <Register />;
-        }
-        if (props.waiting) {
-            return <Wait />;
-        }
-        if (props.story) {
-            return <Read story={props.story} onRestart={props.restart} />;
-        }
-        return <Write />;
-    };
-
-    return getCurrentRoute();
+    if (props.needsName) {
+        return <Register />;
+    }
+    if (props.waiting) {
+        return <Wait />;
+    }
+    if (props.story) {
+        return <Read story={props.story} onRestart={props.restart} />;
+    }
+    return <Write />;
 };
 
 export default connect(s => ({
