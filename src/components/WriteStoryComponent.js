@@ -26,7 +26,7 @@ const InputContainer = styled.form`
 `;
 
 const Input = styled.textarea`
-    border-color: transparent;
+    border: solid 1px #eee;
     border-radius: 0;
     display: block;
     flex: 1;

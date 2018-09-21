@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import styled from 'styled-components';
 import InputIcon from './InputIcon';
 
@@ -38,9 +38,9 @@ const PlayButton = styled.span`
     font-size: .7rem;
 `;
 
-const HeaderComponent = ({playerCount, currentUrl}) => {
+const HeaderComponent = ({playerCount, currentUrl, location}) => {
     const getCTA = () => {
-        if (currentUrl === '/') {
+        if (location.pathname === '/') {
             return <Link to="/play"><PlayButton><InputIcon /> Play</PlayButton></Link>;
         } else {
             return <PlayerCount>{playerCount}</PlayerCount>;
@@ -55,8 +55,7 @@ const HeaderComponent = ({playerCount, currentUrl}) => {
     );
 };
 
-export default connect(s => ({
+export default withRouter(connect(s => ({
     playerCount: s.players.length,
-    currentUrl: s.currentUrl
-}))(HeaderComponent);
+}))(HeaderComponent));
 
