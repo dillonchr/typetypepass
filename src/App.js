@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/HeaderComponent';
 import Home from './components/HomeComponent';
 import Play from './components/PlayRoute';
@@ -9,8 +9,10 @@ export default () => {
         <Router>
             <div>
                 <Header />
-                <Route path={`/`} exact component={Home} />
-                <Route path={`/play`} exact component={Play} />
+                <Switch>
+                    <Route path={`/play`} exact component={Play} />
+                    <Route path={`/`} exact component={Home} />
+                </Switch>
             </div>
         </Router>
     );
