@@ -57,7 +57,7 @@ const Button = styled.button`
     }
 `;
 
-class Story extends React.Component {
+class Story extends React.PureComponent {
     state = {
         input: ''
     };
@@ -93,7 +93,6 @@ class Story extends React.Component {
                     <PromptParagraph>{this.props.prompt}</PromptParagraph>
                     <InputContainer onSubmit={this.onSubmit}>
                         <Input autoFocus
-                                  value={this.state.input}
                                   onChange={this.onChange}
                                   placeholder={getRandoPrompt()}/>
                         <ButtonContainer>
