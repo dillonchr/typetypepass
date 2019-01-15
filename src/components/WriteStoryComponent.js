@@ -81,7 +81,7 @@ class Story extends React.Component {
         this.props.endStory(this.state.input);
     };
 
-    onInput = ({target}) => {
+    onChange = ({target}) => {
         this.setState({input: target.value});
     };
 
@@ -94,7 +94,7 @@ class Story extends React.Component {
                     <InputContainer onSubmit={this.onSubmit}>
                         <Input autoFocus
                                   value={this.state.input}
-                                  onInput={this.onInput}
+                                  onChange={this.onChange}
                                   placeholder={getRandoPrompt()}/>
                         <ButtonContainer>
                             <Button disabled={!this.props.canEnd || !this.state.input} onClick={this.endStory}>
