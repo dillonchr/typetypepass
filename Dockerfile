@@ -3,8 +3,8 @@ WORKDIR /code/
 COPY package*.json ./
 RUN npm i > /dev/null
 COPY . .
-RUN npm run build --production > /dev/null
+RUN npm run build > /dev/null
 
 FROM nginx:1.15.3-alpine
-COPY --from=build /code/public/ /usr/share/nginx/html/
+COPY --from=build /code/build/ /usr/share/nginx/html/
 EXPOSE 80
